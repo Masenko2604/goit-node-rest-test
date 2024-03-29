@@ -3,7 +3,7 @@ import contactsService from "../services/contactsServices.js";
 const contacts = require("../models/contacts");
 const { HttpError, ctrlWrapper } = require("../helpers");
 
-export const listContact = async(req, res) => {
+export const listContact = async (req, res) => {
   const result = await contactsService.listContact();
   res.json(result)
 };
@@ -17,40 +17,35 @@ export const getContactById = async (req, res) => {
   res.json(result);
 };
 
-export const removeContact = async (req, res) => {
-  const { id } = req.params;
-  const result = await contactsService.removeContact(id);
-  if (!result) {
-    throw HttpError(404, "Not found");
-  }
-  res.json({
-    message: "Delet success"
-  })
-};
+const createContact = async (req, res) => {
+    const result = await contactsService.createContact(req.body);
+    res.status(201).json(result);
+}
 
-export const createContact = async (req, res) => {
-  const { id } = req.params;
-  const result = await contactsService.updateOneContact(id, req.body);
-  if (!result) {
-    throw HttpError(404, "Not found");
-  }
-  res.json(result);
-};
-
-export const updateContact = async (req, res) => {
-  const { id } = req.params;
-  const result = await contactsService.updateOneContact(id, req.body);
-  if (!result) {
-    throw HttpError(404, "Not found");
-  }
-  res.json(result);
- };
-
+const updateContactById = async (req, res) => {
+    const { id } = req.params;
+    const result = await contactsService.updateContactById(id, req.body);
+    if (!result) {
+        throw HttpError(404, "Not found");
+    }
+    res.json(result);
+}
+ const removeContactById = async (req, res) => {
+    const { id } = req.params;
+    const result = await contactsService.removeContactById(id);
+    if (!result) {
+        throw HttpError(404, "Not found");
+    }
+    
+    res.json({
+        message: "Delete success"
+    })
+}
 module.exports = {
   listContact: ctrlWrapper(listContact),
   getContactById: ctrlWrapper(getContactById), 
   createContact: ctrlWrapper(createContact),
-  updateContact: ctrlWrapper(updateContact),
-  removeContact: ctrlWrapper(deleteContact),
+  updateContactById: ctrlWrapper(updateContactById),
+  removedContactById: ctrlWrapper(removeContactById),
 
 }

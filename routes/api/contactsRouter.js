@@ -1,17 +1,18 @@
 import express from "express";
 import {
-  getAllContacts,
-  getOneContact,
+  listContact,
+  getContactById,
   deleteContact,
   createContact,
   updateContact,
-} from "../controllers/contactsControllers.js";
+} from "../../controllers/contactsControllers.js";
+import { getContactById } from "../../services/contactsServices.js";
 
 const contactsRouter = express.Router();
 
-contactsRouter.get("/", getAllContacts);
+contactsRouter.get("/", listContact);
 
-contactsRouter.get("/:id", getOneContact);
+contactsRouter.get("/:id", getContactById);
 
 contactsRouter.delete("/:id", deleteContact);
 
