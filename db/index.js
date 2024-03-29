@@ -26,7 +26,7 @@ const createContact = async(data) => {
     return newContact;
 }
 
-const updateContact = async(id, data) => {
+const updateContactById = async(id, data) => {
     const contacts = await listContact();
     const index = contacts.findIndex(item => item.id === id);
     if(index === -1){
@@ -37,7 +37,7 @@ const updateContact = async(id, data) => {
     return contacts[index];
 }
 
-const deleteContact = async(id) => {
+const deleteContactById = async(id) => {
     const contacts = await listContact();
     const index = contacts.findIndex(item => item.id === id);
     if(index === -1){
@@ -52,6 +52,6 @@ module.exports = {
     listContact ,
     getContactById,
     createContact,
-    updateContact,
-    deleteContact,
+    updateContactById,
+    deleteContactById,
 }
