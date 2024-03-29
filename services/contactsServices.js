@@ -28,20 +28,20 @@ export async function getContactById(contactId) {
   }
 }
 
-export async function removeContact(contactId) {
+export async function deleteContact(contactId) {
   try {
     const contactsArr = await listContacts();
     const contacts = contactsArr.filter((contact) => contact.id !== contactId);
-    const deletedContact = await getContactById(contactId);
+    const deleteContact = await getContactById(contactId);
     await fs.writeFile(contactsPath, JSON.stringify(contacts));
 
-    return deletedContact;
+    return deleteContact;
   } catch (error) {
     console.log(error.message);
   }
 }
 
-export async function addContact(name, email, phone) {
+export async function createContact(name, email, phone) {
   try {
     const id = nanoid();
     const userObj = await listContacts();
