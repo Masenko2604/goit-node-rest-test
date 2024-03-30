@@ -4,7 +4,7 @@ import cors from "cors";
 
 import contactsRouter from "./routes/contactsRouter.js";
 
-const contactsRouter = require('./routes/api/contacts')
+// const contactsRouter = require('./routes/api/contacts')
 
 const app = express();
 
