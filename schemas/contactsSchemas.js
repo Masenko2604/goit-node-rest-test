@@ -2,20 +2,13 @@ import Joi from "joi";
 
 const Joi = require("joi");
 
-export const createContactSchema = Joi.object({
-  name: Joi.string().required(),
-  email: Joi.string().required(),
-  phone: Joi.number().required(),
-})
+const Joi = require("joi");
 
-export const updateContactSchema = Joi.object({
-  name: Joi.string().required(),
-  email: Joi.string().required(),
-  phone: Joi.number().required(),
+const createContactSchema = Joi.object({
+    title: Joi.string().required(),
+    author: Joi.string().required(),
 })
 
 module.exports = {
-  createContactSchema,
-  updateContactSchema,
-  
+    createContactSchema,
 }
