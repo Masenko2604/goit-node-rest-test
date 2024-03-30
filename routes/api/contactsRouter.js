@@ -1,51 +1,27 @@
-// import express from "express";
-// import {
-//   listContact,
-//   getContactById,
-//   deleteContactById,
-//   createContact,
-//   updateContactById,
-// } from "../../controllers/contactsControllers.js";
-// import { getContactById } from "../../services/contactsServices.js";
+import express from "express";
+import {
+  getAllContacts,
+  getOneContact,
+  deleteContact,
+  createContact,
+  updateContact,
+} from "../controllers/contactsControllers.js";
+import {
+  createContactSchema,
+  updateContactSchema,
+} from "../schemas/contactsSchemas.js";
+import validateBody from "../middlewares/validateBody.js";
 
-// const contactsRouter = express.Router();
+const contactsRouter = express.Router();
 
-// contactsRouter.get("/", listContact);
+contactsRouter.get("/", getAllContacts);
 
-// contactsRouter.get("/:id", getContactById);
+contactsRouter.get("/:id", getOneContact);
 
-// contactsRouter.delete("/:id", deleteContactById);
+contactsRouter.delete("/:id", deleteContact);
 
-// contactsRouter.post("/", createContact);
+contactsRouter.post("/", validateBody(createContactSchema), createContact);
 
-// contactsRouter.put("/:id", updateContactById);
+contactsRouter.put("/:id", validateBody(updateContactSchema), updateContact);
 
-// export default contactsRouter;
-const express = require('express')
-
-const contacts = require("../../models/contacts")
-
-const router = express.Router()
-
-router.get('/', async (req, res, next) => {
-  const result = await contacts.listContacts();
-  res.json(result)
-})
-
-router.get('/:contactId', async (req, res, next) => {
-  res.json({ message: 'template message' })
-})
-
-router.post('/', async (req, res, next) => {
-  res.json({ message: 'template message' })
-})
-
-router.delete('/:contactId', async (req, res, next) => {
-  res.json({ message: 'template message' })
-})
-
-router.put('/:contactId', async (req, res, next) => {
-  res.json({ message: 'template message' })
-})
-
-module.exports = router
+export default contactsRouter;
