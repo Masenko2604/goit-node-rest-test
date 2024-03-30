@@ -1,22 +1,49 @@
-import express from "express";
-import {
-  getAllContacts,
-  getOneContact,
-  deleteContact,
-  createContact,
-  updateContact,
-} from "../.. https://prnt.sc/EKDbIujo-e9Econtrollers/contactsControllers.js";
+const express = require("express");
 
-const contactsRouter = express.Router();
+const ctrl = require("../../controllers/contacts");
 
-contactsRouter.get("/", getAllContacts);
+const {validateBody} = require("../../middlewares");
 
-contactsRouter.get("/:id", getOneContact);
+const schemas = require("../../schemas/contacts");
 
-contactsRouter.delete("/:id", deleteContact);
+const router = express.Router();
 
-contactsRouter.post("/", createContact);
+router.get("/", ctrl.listContacts);
 
-contactsRouter.put("/:id", updateContact);
+router.get("/:id", ctrl.getContactById);
 
-export default contactsRouter;
+router.post("/", validateBody(schemas.addSchema), ctrl.create);
+
+router.put("/:id",  validateBody(schemas.createSchema), ctrl.updateContactById);
+
+router.delete("/:id", ctrl.deleteContactById);
+
+module.exports = router;
+
+
+
+
+
+
+// import express from "express";
+// import {
+//   getAllContacts,
+//   getOneContact,
+//   deleteContact,
+//   createContact,
+//   updateContact,
+// } from "../.. https://prnt.sc/EKDbIujo-e9Econtrollers/contactsControllers.js";
+
+// const contactsRouter = express.Router();
+
+// contactsRouter.get("/", getAllContacts);
+
+// contactsRouter.get("/:id", getOneContact);
+
+// contactsRouter.delete("/:id", deleteContact);
+
+// contactsRouter.post("/", createContact);
+
+// contactsRouter.put("/:id", updateContact);
+
+// export default contactsRouter;
